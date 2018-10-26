@@ -1,53 +1,58 @@
-import os
-
 import click
 
-from .types import known_types
+from .core import discover_commands, do_command
+from . import __version__
 
 
-def do(method):
-    # first look for project.yml
-    # then look for scritps dir
-    # then look for specific kinds of files if we haven't found anything yet (if found multiple then say so)
-    # matches = inferredos.listdir()
+class Pcli(click.Group):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    inferred = []
-    paths = os.listdir()
-    for t in known_types:
-        for p in paths:
-            if t.recognizes_path(p) and hasattr(t, method):
-                inferred.append(t(p))
+        # builtins = (
+        #     "setup",
+        #     "work",
+        #     "test",
+        #     "deploy",
+        # )
 
-    if not inferred:
-        click.secho("Not sure what to run", fg='red')
-        return
+        for name in discover_commands().keys():
 
-    if len(inferred) > 1:
-        print(inferred)
-        print("choosing the first type...")
+            @click.command(name)
+            @click.pass_context
+            def func(ctx):
+                do_command(ctx.info_name)
+                # exit(0 if result else 1)
 
-    click.secho(f"Running {method} using {inferred[0]}")
-    to_call = getattr(inferred[0], method)
-    to_call()
+            self.add_command(func)
+
+        # if os.path.exists(CONFIG_FILENAME):
+        #     config = yaml.safe_load(open(CONFIG_FILENAME))
+        #     commands = config.get("commands", {})
+        #     for name, cmd in commands.items():
+        #         @click.command(name)
+        #         @click.pass_context
+        #         def func(ctx):
+        #             do(ctx.info_name)
+        #
+        #         self.add_command(func)
 
 
-@click.group()
+@click.group(cls=Pcli, invoke_without_command=True)
+@click.option("--version", is_flag=True)
 @click.pass_context
-def cli(ctx):
-    pass
+def cli(ctx, version):
+    if not ctx.invoked_subcommand:
+        if version:
+            click.echo(__version__)
+        else:
+            click.echo(ctx.get_help())
 
 
-@cli.command()
-@click.pass_context
-def setup(ctx):
-    do("setup")
+# @cli.command()
+# def foo():
+#     print('ok')
+#     print(discover_commands())
 
 
-@cli.command()
-@click.pass_context
-def work(ctx):
-    do("work")
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     cli()

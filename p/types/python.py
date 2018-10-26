@@ -6,7 +6,7 @@ from ..run import run
 
 class Pipenv(BaseType):
     @classmethod
-    def recognizes_path(cls, path):
+    def _recognizes_path(cls, path):
         return os.path.basename(path) == "Pipfile.lock"
 
     def setup(self):

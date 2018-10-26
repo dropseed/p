@@ -7,6 +7,7 @@ with open('README.md') as f:
 requirements = (
     'click',
     'pyyaml',
+    'requests',
 )
 
 setup(
