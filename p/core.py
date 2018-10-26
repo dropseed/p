@@ -1,6 +1,4 @@
-import tempfile
 import os
-import subprocess
 
 import click
 
@@ -49,15 +47,6 @@ def do_command(command):
 
     click.secho(f"Running {command} using {cmd}")
     if isinstance(cmd, str):
-        # could have a scripts type so these are treated the same?
-        # if len(cmd.splitlines()) > 1:
-        #     temp = tempfile.NamedTemporaryFile(delete=False)
-        #     with open(temp.name, "w+") as f:
-        #         f.write(cmd)
-        #     subprocess.check_call(["chmod", "+x", temp.name])
-        #     run(temp.name)
-        #     # run(f"rm {temp.name}")
-        # else:
         run(cmd)
     else:
         cmd()
