@@ -7,6 +7,7 @@ import click
 GIT_COMMANDS = (
     # TODO should pre-commit be git-pre-commit?
     "pre-commit",
+    "post-merge",
 )
 
 
