@@ -11,8 +11,8 @@ class Pcli(click.Group):
         self.discovered_commands = discover_commands()
 
         for name, subcommands in self.discovered_commands.items():
-            help = ', '.join([x.cmd for x in subcommands])
-            help = 'Using: ' + help
+            help = ", ".join([x.cmd for x in subcommands])
+            help = "Using: " + help
 
             @click.command(name, help=help)
             @click.pass_context
