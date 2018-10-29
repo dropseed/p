@@ -8,50 +8,34 @@ class Pcli(click.Group):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # builtins = (
-        #     "setup",
-        #     "work",
-        #     "test",
-        #     "deploy",
-        # )
+        self.discovered_commands = discover_commands()
 
-        for name in discover_commands().keys():
+        for name in self.discovered_commands.keys():
 
             @click.command(name)
             @click.pass_context
             def func(ctx):
-                do_command(ctx.info_name)
+                do_command(ctx.info_name, self.discovered_commands)
                 # exit(0 if result else 1)
 
             self.add_command(func)
 
-        # if os.path.exists(CONFIG_FILENAME):
-        #     config = yaml.safe_load(open(CONFIG_FILENAME))
-        #     commands = config.get("commands", {})
-        #     for name, cmd in commands.items():
-        #         @click.command(name)
-        #         @click.pass_context
-        #         def func(ctx):
-        #             do(ctx.info_name)
-        #
-        #         self.add_command(func)
-
 
 @click.group(cls=Pcli, invoke_without_command=True)
 @click.option("--version", is_flag=True)
+@click.option("--list", is_flag=True)
 @click.pass_context
-def cli(ctx, version):
+def cli(ctx, version, list):
     if not ctx.invoked_subcommand:
         if version:
             click.echo(__version__)
+        elif list:
+            for cmd, subcommands in ctx.command.discovered_commands.items():
+                click.echo(cmd)
+                for subcommand in subcommands:
+                    click.echo(f"  {subcommand}")
         else:
             click.echo(ctx.get_help())
-
-
-# @cli.command()
-# def foo():
-#     print('ok')
-#     print(discover_commands())
 
 
 if __name__ == "__main__":
