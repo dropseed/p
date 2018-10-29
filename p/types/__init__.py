@@ -4,6 +4,7 @@ from .js import Npm, Yarn
 from .python import Pipenv
 from .terraform import Terraform
 from .combine import Combine
+from .carthage import Carthage
 
 
 # in order of priority
@@ -17,4 +18,5 @@ known_types = [
     Npm,
     Terraform,
     Combine,
+    Carthage,
 ]
