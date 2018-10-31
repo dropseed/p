@@ -18,9 +18,13 @@ class Npm(BaseType):
         package = json.load(
             open(os.path.join(os.path.dirname(self._path), "package.json"))
         )
-        scripts = package.get("scripts", {})
-        if "start" in scripts:
-            self.work = "npm run start"
+        # scripts = package.get("scripts", {})
+        # if "start" in scripts:
+        #     self.work = "npm run start"
+
+        for k in package.get("scripts", {}).keys():
+            setattr(self, k, f"npm run {k}")
+
 
 
 class Yarn(Npm):
