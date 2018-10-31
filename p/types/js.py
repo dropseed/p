@@ -2,7 +2,6 @@ import os
 import json
 
 from .base import BaseType
-from ..run import run
 
 
 class Npm(BaseType):
@@ -21,7 +20,7 @@ class Npm(BaseType):
         )
         scripts = package.get("scripts", {})
         if "start" in scripts:
-            self.work = lambda: run(scripts["start"])
+            self.work = "npm run start"
 
 
 class Yarn(Npm):
