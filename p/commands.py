@@ -23,13 +23,13 @@ class Command:
         phase = parts[1] if len(parts) > 1 else None
         return phase
 
-    def run(self):
+    def run(self, cmd_args):
         if isinstance(self.cmd, str):
-            run(self.cmd)
+            run(self.cmd, cmd_args)
         elif isinstance(self.cmd, list):
-            [run(x) for x in self.cmd]
-        else:
-            self.cmd()
+            [run(x, cmd_args) for x in self.cmd]
+        # else:
+        #     self.cmd()
 
     def __eq__(self, other):
         return (self.name, self.cmd, self.type_obj) == (

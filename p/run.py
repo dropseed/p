@@ -5,9 +5,8 @@ import subprocess
 import click
 
 
-def run(args, split=True):
-    if split:
-        args = shlex.split(args)
+def run(cmd_str, cmd_args):
+    args = shlex.split(cmd_str) + list(cmd_args)
     click.secho(f"Running {args}", fg="green")
     try:
         subprocess.check_call(args)

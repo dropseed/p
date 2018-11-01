@@ -40,7 +40,7 @@ def discover_commands(in_path=".", ordered=True):
         return commands
 
 
-def do_command(command, commands):
+def do_command(command, commands, cmd_args):
     # commands = discover_commands()
 
     if command not in commands:
@@ -52,4 +52,4 @@ def do_command(command, commands):
 
     for subcommand in commands[command]:
         click.secho(f"Running command: {subcommand}")
-        subcommand.run()
+        subcommand.run(cmd_args)

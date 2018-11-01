@@ -14,10 +14,13 @@ class Pcli(click.Group):
             help = ", ".join([x.cmd for x in subcommands])
             help = "Using: " + help
 
-            @click.command(name, help=help)
+            @click.command(
+                name, help=help, context_settings=dict(ignore_unknown_options=True)
+            )
+            @click.argument("cmd_args", nargs=-1, type=click.UNPROCESSED)
             @click.pass_context
-            def func(ctx):
-                do_command(ctx.info_name, self.discovered_commands)
+            def func(ctx, cmd_args):
+                do_command(ctx.info_name, self.discovered_commands, cmd_args)
                 # exit(0 if result else 1)
 
             self.add_command(func)
