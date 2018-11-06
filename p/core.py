@@ -6,7 +6,7 @@ from .types import known_types
 from . import git
 
 
-def discover_commands(in_path=".", ordered=True):
+def discover_commands(in_path="."):
     commands = {}
 
     paths = os.listdir(in_path)
@@ -26,18 +26,7 @@ def discover_commands(in_path=".", ordered=True):
                     if command.name not in commands[command.base_command_name]:
                         commands[command.base_command_name][command.name] = command
 
-    # recursively add any p- subdirectories
-    subdirs = [x for x in paths if os.path.basename(x).startswith("p-")]
-    for sub in subdirs:
-        subdir_commands = discover_commands(os.path.join(in_path, sub), ordered=False)
-        for sk, sv in subdir_commands.items():
-            # update all our commands, but with the current having priority over the subdir
-            commands[sk] = {**sv, **commands.get(sk, {})}
-
-    if ordered:
-        return {k: sorted(commands[k].values()) for k in sorted(commands.keys())}
-    else:
-        return commands
+    return {k: sorted(commands[k].values()) for k in sorted(commands.keys())}
 
 
 def do_command(command, commands, cmd_args):

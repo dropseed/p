@@ -77,14 +77,6 @@ of scripts will be:
 - `{command}--post`
 - `{command}--post--{anything}` - sorted alphabetically
 
-
-# Config sharing
-
-P will automatically load any subdirectory starting with `p-`. So if you want to
-share scripts across projects, one way is to use git submodules and name the
-directories `p-{name}`. They will be loaded alphabetically -- the first match
-for a command will be the one used.
-
 # Inspired by
 
 - [Dropseed's](https://github.com/dropseed) project-cli (private)
