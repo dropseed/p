@@ -9,7 +9,7 @@ yourself with a project every time you sit down.
 
 It does this by providing a basic set of commands that adapt to the project
 you're working on. So, when it's time to work on something, you only need to
-remember `p setup` to get things installed, and `p work` to get going. It is a
+remember `p setup` to get things installed~~, and `p work` to get going~~. It is a
 simple abstraction layer that makes it easier to jump into a project without
 needing to remember or dig for the specific steps to get up and running so that
 you can actually...do work.
@@ -18,13 +18,6 @@ P is not a project requirement or dependency, it is tool that *you* can choose
 to make your own life easier (or the lives of your coworkers and contributors).
 Nothing in your project should depend on p, but rather conform to p-friendly
 standards which are usable with or without p itself.
-
-Out of the box, *p* has the following commands and can automatically infer the
-implementation for a number of common project types:
-
-- `p setup` - installs or reinstalls any dependencies or additional steps for you to start working
-- `p work` - runs any local servers or scripts for you to actually do local development
-- ~~`p test` - runs tests~~
 
 Beyond that, p does its best to make additional project commands available by
 looking in common places. Lots of people use Makefiles, language-specific things
