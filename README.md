@@ -1,61 +1,144 @@
 # p
 
+## The problem
+
+Every project is different, but damn near every project comes with a set of
+development commands or scripts to run common actions. And if it doesn't, then
+it probably should.
+
+Different languages, people, and tools accomplish this in different ways. Some
+projects use the good ol' `Makefile`, while others use `package.json` "scripts",
+bash scripts, `rake`, `fabric`, and so on and so on...
+
+It can often take several minutes just to figure out how to *start* working on
+something.
+
+## The solution
+
 The goal of *p* is to make it easier for you to work on projects -- regardless
-of language, layout, or tools. Context switching sucks, and p aims to make it
-easier to jump into a new (or old) project by providing commands you only need
-to learn once. If you personally decide to use p, you should be able to spend
-more time doing the work you set out to do, and less time (re-)familiarizing
-yourself with a project every time you sit down.
+of language, layout, or tools. Context switching sucks, and p makes it easier to
+jump into a new (or old) project by providing a simple command that you only
+need to learn once. If you personally decide to use p, you should be able to
+spend more time doing the work you set out to do, and less time
+(re-)familiarizing yourself with a project every time you sit down.
 
-It does this by providing a basic set of commands that adapt to the project
-you're working on. So, when it's time to work on something, you only need to
-remember `p setup` to get things installed~~, and `p work` to get going~~. It is a
-simple abstraction layer that makes it easier to jump into a project without
-needing to remember or dig for the specific steps to get up and running so that
-you can actually...do work.
+It does this by providing the `p` command. Running `p` will show you which
+commands are available for the project you are on.
 
-P is not a project requirement or dependency, it is tool that *you* can choose
-to make your own life easier (or the lives of your coworkers and contributors).
-Nothing in your project should depend on p, but rather conform to p-friendly
-standards which are usable with or without p itself.
-
-Beyond that, p does its best to make additional project commands available by
-looking in common places. Lots of people use Makefiles, language-specific things
-like `package.json` "scripts", or event just a "scripts" directory. P will
-automatically look in the typical places and then make anything it finds
-available as a p command:
+For example:
 ```sh
+$ cd project
+$ p
+Usage: p [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --version
+  --list
+  --help     Show this message and exit.
+
+Commands:
+  mypy        Using: ./scripts/mypy
+  pre-commit  Using: ./scripts/pre-commit
+  setup       Using: pipenv sync --dev
+  test        Using: ./scripts/test
 ```
 
-## Scripts
+It does this by discovering scripts and commands that already exist within the
+project, and by adding automatically generated commands for known package
+managers or tools.
 
-The behavior of each command can be overridden in a handful of different ways.
-One of the most universal is to have a `scripts` directory in your project, with
-executable scripts written in any language. P will automatically detect and add
-these scripts as commands, and anybody not using p you can easily run them
-manually (`./scripts/test`).
+**P is not a project requirement or dependency.** it is tool that *you* can choose
+to make your own life easier (or the lives of your p-using coworkers and
+contributors). Nothing in your project should depend on p, but rather conform to
+p-friendly standards which are usable with or without p itself.
 
-## Makefile
+Ideally, p will "just work". But if not, it is often in your project's best
+interest to design a developer experience that *would* work if someone were
+using p. That is -- script out some of the most commonly used actions for your
+project (`install`, `test`, `deploy`, etc.), and put them in a uniform place
+where contributors can easily figure out how to use them. P is simply a small
+abstraction layer to make it even easier yet for people that use it.
 
-Another common universal pattern is to use a `Makefile`. If there is a Makefile
-in your project, p will automatically parse `.PHONY` and make those commands
-available via p too. So if you have a `make test`, it will also be available to
-p users via `p test`.
+## Put commands where p can find them
 
-## Specific languages and tools
+### `./scripts` or `./bin`
 
-P is also capable of adapting to common practices in the most popular languages
-and tools. In javascript, for example, `package.json` has a nice `scripts` entry
-where most project-commands live. P detects those and makes them available
-automatically, in addition to changing the behavior of `p setup` to do things
-like `npm install`.
+P will automatically find executable scripts (with no file extension) in
+`./scripts` or `./bin`. The filename will be added as a command so that they can
+simply be run by doing `p {script_name}`.
 
-# Git hooks
+```sh
+$ tree scripts/
+scripts/
+├── compile-assets
+├── load-fixtures
+├── pre-commit
+├── setup
+├── start-postgres
+├── test
+└── work
+```
+
+Will result in
+```sh
+$ p
+Usage: p [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --version
+  --list
+  --help     Show this message and exit.
+
+Commands:
+  compile-assets  Using: ./scripts/compile-assets
+  load-fixtures   Using: ./scripts/load-fixtures
+  pre-commit      Using: ./scripts/pre-commit
+  setup           Using: ./scripts/setup
+  start-postgres  Using: ./scripts/start-postgres
+  test            Using: ./scripts/test
+  work            Using: ./scripts/work
+```
+
+### Makefile
+
+If there is a `Makefile` in your project, p will automatically parse `.PHONY`
+and make those commands available via p too. So if you have a `make test`, it
+will also be available to p users via `p test`.
+
+## `package.json` scripts
+
+TODO write something
+
+## Automatic commands
+
+P will automatically generate commands for known package managers. These can be
+overridden by providing your own script of the same name in one of the
+recognized locations. So, for example, if you want contributors to use something
+more specific than a regular `yarn install`, just add an "install" script to
+`package.json`.
+
+Currently supported:
+- `package.json`
+  - `npm install` as `p install`
+- `yarn.lock`
+  - `yarn install` as `p install`
+- `.terraform` or `terraform.tfstate`
+  - `terraform init` as `p install`
+  - `terraform apply` as `p deploy`
+- `Pipfile.lock`
+  - `pipenv sync --dev` as `p install`
+- `combine.yml`
+  - `combine work` as `p work`
+- `Cartfile` or `Cartfile.resolved`
+  - `carthage update` as `p install`
+
+
+## Git hooks
 
 P also provides automatically installation of git hooks, if you use commands
-named `pre-commit` or `post-merge`.
+named `pre-commit` or `post-merge`. On `p install` or `p {git_hook_name}` it will prompt you to install it into your local `.githooks`.
 
-# Chaining scripts together
+## Chaining scripts together (advanced)
 
 By default, the first match found for a command (ex. `test`) will be used. If
 you want to chain together multiple scripts, you can namespace them like
@@ -70,9 +153,10 @@ of scripts will be:
 - `{command}--post`
 - `{command}--post--{anything}` - sorted alphabetically
 
-# Inspired by
+## Inspired by
 
 - [Dropseed's](https://github.com/dropseed) project-cli (private)
 - [Flint Hills Design's](https://github.com/flinthillsdesign) fhd-cli (private)
 - https://github.com/github/scripts-to-rule-them-all
 - https://github.com/bkeepers/strappydoo
+- having too many projects
