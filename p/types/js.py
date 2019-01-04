@@ -12,7 +12,7 @@ class Npm(BaseType):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.setup = "npm install"
+        self.install = "npm install"
 
         package = json.load(
             open(os.path.join(os.path.dirname(self._path), "package.json"))
@@ -30,4 +30,4 @@ class Yarn(Npm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.setup = "yarn install"
+        self.install = "yarn install"

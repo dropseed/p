@@ -10,4 +10,4 @@ class Pipenv(BaseType):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setup = "pipenv sync --dev"
+        self.install = "pipenv sync --dev"

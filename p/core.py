@@ -36,7 +36,7 @@ def do_command(command, commands, cmd_args):
         click.secho("Not sure what to run", fg="red")
         return False
 
-    if os.path.exists(".git") and command == "setup" or command in git.GIT_COMMANDS:
+    if os.path.exists(".git") and command == "install" or command in git.GIT_COMMANDS:
         git.install_hooks(commands)
 
     for subcommand in commands[command]:

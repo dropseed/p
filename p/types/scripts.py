@@ -6,7 +6,7 @@ from .base import BaseType
 class Scripts(BaseType):
     @classmethod
     def _recognizes_path(cls, path):
-        return os.path.basename(path) == "scripts"
+        return os.path.basename(path) in ("scripts", "bin")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
