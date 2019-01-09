@@ -40,5 +40,5 @@ work            Using: combine work
 
 ```sh
 # system-wide or user-wide, not per project
-$ pip3 install git+https://github.com/dropseed/p.git#egg=p
+$ pip3 install -U git+https://github.com/dropseed/p.git#egg=p
 ```
