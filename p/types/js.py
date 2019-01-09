@@ -35,4 +35,4 @@ class Yarn(Npm):
     @property
     def _namespace(self):
         # overwrite the commands from Npm class
-        return 'npm'
+        return "npm"

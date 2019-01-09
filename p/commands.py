@@ -21,7 +21,7 @@ class Command:
     def phase(self):
         parts = self.name.split("--")
         phase = parts[1] if len(parts) > 1 else None
-        if phase in ('pre', 'post'):
+        if phase in ("pre", "post"):
             return phase
         return None
 

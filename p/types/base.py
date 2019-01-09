@@ -11,7 +11,7 @@ class BaseType:
         for name in dir(self):
             value = getattr(self, name)
             if not name.startswith("_") and (callable(value) or isinstance(value, str)):
-                namespaced_name = f'{name}--{self._namespace}'
+                namespaced_name = f"{name}--{self._namespace}"
                 commands.append(Command(namespaced_name, value, self))
 
         return commands
