@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "watch": "watchman-make -p \"tailwind.js\" \"**/_style.css\" -r \"npm run compile-css\"",
+    "compile-css": "./node_modules/.bin/tailwind build ./content/assets/css/_style.css -c ./tailwind.js -o ./content/assets/css/style.css"
+  },
+  "dependencies": {
+    "tailwindcss": "^0.7.3"
+  }
+}

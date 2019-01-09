@@ -1,0 +1,214 @@
+{% extends "base.template.html" %}
+
+{% block content %}
+
+<div class="text-center py-20 bg-primary-darker shadow-md">
+  <h2 class="text-primary-lighter text-lg leading-normal text-3xl font-normal">P is for project.</h2>
+  <h1 class="font-sans font-bold text-display my-10 bg-primary-dark text-grey-light inline-block px-5 rounded shadow shadow-md">P</h1>
+  <h2 class="text-primary-lighter text-lg leading-normal text-3xl font-normal">As in, "How the hell do I work on this project."</h2>
+</div>
+
+<div class="container mx-auto">
+
+  <h2 class="section-heading">The problem</h2>
+  <p><strong>It can often take several minutes just to figure out how to <em>start</em> working on
+  something.</strong></p>
+
+  <p>Every project is different, but damn near every project comes with a set of
+  development commands or scripts to run common actions. And if it doesn’t, then
+  it probably should.</p>
+  <p>Different languages, people, and tools accomplish this in different ways. Some
+  projects use the good ol’ <code>Makefile</code>, while others use <code>package.json</code> “scripts”,
+  bash scripts, <code>rake</code>, <code>fabric</code>, and so on and so on…</p>
+
+
+  <h2 class="section-heading">The solution</h2>
+
+  <p><strong>Running <code>p</code> will show you which commands are available for the project you are on.</strong></p>
+
+  <p>For example:</p>
+  <pre><code>$ cd project
+$ p
+Usage: p [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --version
+  --list
+  --help     Show this message and exit.
+
+Commands:
+  mypy        Using: ./scripts/mypy
+  pre-commit  Using: ./scripts/pre-commit
+  setup       Using: pipenv sync --dev
+  test        Using: ./scripts/test</code></pre>
+
+  <p>It does this by discovering scripts and commands that already exist within
+  the project, and by adding automatically inferred commands for known package
+  managers or tools.</p>
+
+  <p><strong>P is not a project requirement or dependency -- it is a personal
+  tool.</strong> Nothing in your project should depend on p, but rather conform
+  to p-friendly standards which are usable with or without p itself.</p>
+
+  <p>Ideally, p will “just work”. But if not, it is often in your project’s best
+  interest to design a developer experience that <em>would</em> work if someone
+  were using p. That is – script out some of the most commonly used actions for
+  your project (<code>install</code>, <code>test</code>, <code>deploy</code>,
+  etc.), and put them in a uniform place where contributors can easily figure
+  out how to use them. P is simply a small abstraction layer to make it even
+  easier yet for people that use it.</p>
+
+  <h2 class="section-heading">Install it for yourself</h2>
+
+  <p>Don't add it to a project. Add it to your machine, system-wide or user-wide.</p>
+
+  <pre><code>$ pip3 install git+https://github.com/dropseed/p.git#egg=p</code></pre>
+
+  <h2 class="section-heading">Make your projects p-friendly</h2>
+
+  <h3 class="mt-10 mb-4 text-2xl">Local scripts</h3>
+
+  <p>P will automatically find executable scripts (with no file extension) in
+  <code>./scripts</code> or <code>./bin</code>. The filename will be added as a command so that they can
+  simply be run by doing <code>p {script-name}</code>.</p>
+  <pre><code>$ tree scripts/
+scripts/
+├── compile-assets
+├── load-fixtures
+├── pre-commit
+├── setup
+├── start-postgres
+├── test
+└── work</code></pre>
+
+  <p>Will result in:</p>
+
+  <pre><code>$ p
+Usage: p [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --version
+  --list
+  --help     Show this message and exit.
+
+Commands:
+  compile-assets  Using: ./scripts/compile-assets
+  load-fixtures   Using: ./scripts/load-fixtures
+  pre-commit      Using: ./scripts/pre-commit
+  setup           Using: ./scripts/setup
+  start-postgres  Using: ./scripts/start-postgres
+  test            Using: ./scripts/test
+  work            Using: ./scripts/work</code></pre>
+
+  <h3 class="mt-10 mb-4 text-2xl">Makefile</h3>
+
+  <p>If there is a <code>Makefile</code> in your project, p will automatically
+  parse <code>.PHONY</code> and make those commands available via p. So if you
+  have <code>make test</code>, it will also be available to p users via <code>p
+  test</code>.</p>
+
+  <h3 class="mt-10 mb-4 text-2xl">package.json scripts</h3>
+
+  <p>Entries in your <code>package.json</code> "scripts" will automatically be mapped to p commands.</p>
+
+  <p>For example:</p>
+
+  <pre><code>{
+  "scripts": {
+    "start": "react-scripts start"
+  }
+}</code></pre>
+
+  <p>Would result in:</p>
+
+  <pre><code>Usage: p [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --version
+  --list
+  --help     Show this message and exit.
+
+Commands:
+  install  Using: yarn install
+  start    Using: npm run start</code></pre>
+
+  <h2 class="section-heading">Inferred commands</h2>
+
+  <p>P will automatically add commands for known package managers. These
+  can be overridden by providing your own script of the same name in one of the
+  recognized locations. So, for example, if you want contributors to use
+  something more specific than a regular <code>yarn install</code>, just add an
+  “install” script to <code>package.json</code>.</p>
+
+  <div class="border border-grey-light bg-grey-lighter text-grey-darker p-4 rounded shadow">
+    We only add things as people need them. If you don't see what you need, tell us!
+  </div>
+
+  <h3 class="mt-8 mb-2">package.json</h3>
+  <ul>
+    <li><code>npm install</code> as <code>p install</code></li>
+  </ul>
+
+  <h3 class="mt-8 mb-2">yarn.lock</h3>
+  <ul>
+    <li><code>yarn install</code> as <code>p install</code></li>
+  </ul>
+
+  <h3 class="mt-8 mb-2">.terraform or terraform.tfstate</h3>
+  <ul>
+    <li><code>terraform init</code> as <code>p install</code></li>
+    <li><code>terraform apply</code> as <code>p deploy</code></li>
+  </ul>
+
+  <h3 class="mt-8 mb-2">Pipfile.lock</h3>
+  <ul>
+    <li><code>pipenv sync --dev</code> as <code>p install</code></li>
+  </ul>
+
+  <h3 class="mt-8 mb-2">combine.yml</h3>
+  <ul>
+    <li><code>combine work</code> as <code>p work</code></li>
+  </ul>
+
+  <h3 class="mt-8 mb-2">Cartfile or Cartfile.resolved</h3>
+  <ul>
+    <li><code>carthage update</code> as <code>p install</code></li>
+  </ul>
+
+
+  <h2 class="section-heading">Git hooks</h2>
+
+  <p>P also provides automatically installation of git hooks, if you use
+  commands named <code>pre-commit</code> or <code>post-merge</code>. On <code>p
+  install</code> or <code>p {git-hook-name}</code> it will prompt you to install
+  it into your local <code>.githooks</code>.</p>
+
+  <h2 class="section-heading">Chaining scripts together (advanced)</h2>
+
+  <p>By default, the first match found for a command (ex. <code>test</code>)
+  will be used. If you want to chain together multiple scripts, you can
+  namespace them like <code>test-anothertest</code>. You can further specify
+  <em>when</em> they are run by using the special <code>--pre--</code> and
+  <code>--post--</code> separators (ex. <code>test--pre--something</code>). So
+  the order of scripts will be:</p>
+
+  <ul>
+    <li><code>{command}--pre</code></li>
+    <li><code>{command}--pre--{anything}</code> - sorted alphabetically</li>
+    <li><code>{command}</code></li>
+    <li><code>{command}--{anything}</code> - sorted alphabetically</li>
+    <li><code>{command}--post</code></li>
+    <li><code>{command}--post--{anything}</code> - sorted alphabetically</li>
+  </ul>
+
+  <h2 class="section-heading">Inspired by</h2>
+  <ul>
+    <li><a href="https://github.com/dropseed">Dropseed’s</a> project-cli (private)</li>
+    <li><a href="https://github.com/flinthillsdesign">Flint Hills Design’s</a> fhd-cli (private)</li>
+    <li><a href="https://github.com/github/scripts-to-rule-them-all">https://github.com/github/scripts-to-rule-them-all</a></li>
+    <li><a href="https://github.com/bkeepers/strappydoo">https://github.com/bkeepers/strappydoo</a></li>
+    <li>having too many projects</li>
+  </ul>
+
+</div>
+{% endblock %}
