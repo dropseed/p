@@ -31,3 +31,8 @@ class Yarn(Npm):
         super().__init__(*args, **kwargs)
 
         self.install = "yarn install"
+
+    @property
+    def _namespace(self):
+        # overwrite the commands from Npm class
+        return 'npm'

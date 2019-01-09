@@ -21,7 +21,9 @@ class Command:
     def phase(self):
         parts = self.name.split("--")
         phase = parts[1] if len(parts) > 1 else None
-        return phase
+        if phase in ('pre', 'post'):
+            return phase
+        return None
 
     def run(self, cmd_args):
         if isinstance(self.cmd, str):
