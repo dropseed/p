@@ -21,7 +21,7 @@ code {
   @apply bg-primary-lightest text-primary rounded px-1;
 }
 pre > code {
-  @apply bg-primary-darker text-grey-light rounded shadow-md p-4 block w-100 mb-8;
+  @apply bg-primary-darker text-grey-light rounded shadow-md p-4 block w-100 mb-8 overflow-x-auto;
 }
 
 a {

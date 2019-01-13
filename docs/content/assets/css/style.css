@@ -504,6 +504,10 @@ table {
 
 .container {
   width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 @media (min-width: 576px) {
@@ -557,6 +561,7 @@ pre > code {
   display: block;
   width: 100%;
   margin-bottom: 2rem;
+  overflow-x: auto;
 }
 
 a {
