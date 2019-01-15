@@ -19,12 +19,20 @@ def discover_commands(in_path="."):
             if cmd_type._recognizes_path(full_p):
                 obj = cmd_type(full_p)
 
-                for command in obj._available_commands():
+                for command in obj._available_commands.values():
                     if command.base_command_name not in commands:
                         commands[command.base_command_name] = {}
 
                     if command.name not in commands[command.base_command_name]:
                         commands[command.base_command_name][command.name] = command
+
+    # if any manual commands are provided, remove all inferred commands from that group
+    for base_name, commands_by_name in commands.items():
+        has_manual_commands = any([not x.inferred for x in commands_by_name.values()])
+        if has_manual_commands:
+            to_pop = [name for name, command in commands_by_name.items() if command.inferred]
+            for p in to_pop:
+                commands_by_name.pop(p)
 
     return {k: sorted(commands[k].values()) for k in sorted(commands.keys())}
 

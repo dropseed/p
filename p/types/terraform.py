@@ -10,5 +10,5 @@ class Terraform(BaseType):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.install = "terraform init"
-        self.deploy = "terraform apply"
+        self._add_command("install", "terraform init")
+        self._add_command("deploy", "terraform apply")

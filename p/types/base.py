@@ -4,17 +4,11 @@ from ..commands import Command
 class BaseType:
     def __init__(self, path):
         self._path = path
+        self._available_commands = {}
 
-    def _available_commands(self):
-        commands = []
-
-        for name in dir(self):
-            value = getattr(self, name)
-            if not name.startswith("_") and (callable(value) or isinstance(value, str)):
-                namespaced_name = f"{name}--{self._namespace}"
-                commands.append(Command(namespaced_name, value, self))
-
-        return commands
+    def _add_command(self, name, run, inferred=True):
+        namespaced_name = f"{name}--{self._namespace}"
+        self._available_commands[namespaced_name] = Command(namespaced_name, run, self, inferred)
 
     @property
     def _namespace(self):

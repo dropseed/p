@@ -19,4 +19,4 @@ class Scripts(BaseType):
                 and os.access(p, os.X_OK)
             ):
                 # just sets it as a string, which will be "run" automatically
-                setattr(self, s, p)
+                self._add_command(s, p, inferred=False)

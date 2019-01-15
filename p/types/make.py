@@ -20,4 +20,4 @@ class Makefile(BaseType):
                 commands = commands + items
 
         for cmd in commands:
-            setattr(self, cmd, f"make {cmd}")
+            self._add_command(cmd, f"make {cmd}", inferred=False)

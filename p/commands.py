@@ -5,10 +5,11 @@ from .run import run
 
 @total_ordering
 class Command:
-    def __init__(self, name, cmd, type_obj):
+    def __init__(self, name, cmd, type_obj, inferred):
         self.name = name
         self.cmd = cmd
         self.type_obj = type_obj
+        self.inferred = inferred
 
     def __str__(self):
         return f"{self.name} <- {self.type_obj._path}"

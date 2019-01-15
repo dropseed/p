@@ -12,14 +12,14 @@ class Npm(BaseType):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.install = "npm install"
+        self._add_command("install", "npm install")
 
         package = json.load(
             open(os.path.join(os.path.dirname(self._path), "package.json"))
         )
 
         for k in package.get("scripts", {}).keys():
-            setattr(self, k, f"npm run {k}")
+            self._add_command(k, f"npm run {k}", inferred=False)
 
 
 class Yarn(Npm):
@@ -29,8 +29,7 @@ class Yarn(Npm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        self.install = "yarn install"
+        self._add_command("install", "yarn install")
 
     @property
     def _namespace(self):

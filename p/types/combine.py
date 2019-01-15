@@ -10,4 +10,4 @@ class Combine(BaseType):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.work = "combine work"
+        self._add_command("work", "combine work")
