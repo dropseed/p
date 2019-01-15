@@ -30,7 +30,9 @@ def discover_commands(in_path="."):
     for base_name, commands_by_name in commands.items():
         has_manual_commands = any([not x.inferred for x in commands_by_name.values()])
         if has_manual_commands:
-            to_pop = [name for name, command in commands_by_name.items() if command.inferred]
+            to_pop = [
+                name for name, command in commands_by_name.items() if command.inferred
+            ]
             for p in to_pop:
                 commands_by_name.pop(p)
 

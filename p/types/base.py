@@ -8,7 +8,9 @@ class BaseType:
 
     def _add_command(self, name, run, inferred=True):
         namespaced_name = f"{name}--{self._namespace}"
-        self._available_commands[namespaced_name] = Command(namespaced_name, run, self, inferred)
+        self._available_commands[namespaced_name] = Command(
+            namespaced_name, run, self, inferred
+        )
 
     @property
     def _namespace(self):
