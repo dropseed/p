@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    {% if env == "production" %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138135262-1"></script>
     <script>
@@ -10,6 +11,7 @@
 
       gtag('config', 'UA-138135262-1');
     </script>
+    {% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>p &mdash; Dropseed</title>
