@@ -5,6 +5,7 @@ from .python import Pipenv
 from .terraform import Terraform
 from .combine import Combine
 from .carthage import Carthage
+from .dep import Dep
 
 
 # in order of priority
@@ -19,4 +20,5 @@ known_types = [
     Terraform,
     Combine,
     Carthage,
+    Dep,
 ]
