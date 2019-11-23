@@ -15,22 +15,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>p &mdash; Dropseed</title>
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:200,200i,300,300i,400,400i,500,500i|Fira+Mono" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/static/css/main.css">
   </head>
-  <body class="font-sans font-normal">
+  <body class="font-sans bg-purple-800">
 
-    <div class="text-right py-3 text-sm bg-grey-lighter font-light">
-      <div class="container">
-        p is a product of  <a href="https://www.dropseed.io" class="no-underline">Dropseed</a>
+    <div class="text-right py-3 text-sm font-light bg-purple-800 text-purple-400">
+      <div class="container mx-auto px-4">
+        p is a product of  <a href="https://www.dropseed.io" class="text-purple-300 hover:underline">Dropseed</a>
       </div>
     </div>
 
-    {% block content %}{% endblock %}
+    <div class="text-center py-20 bg-purple-900 font-light shadow-lg">
+      <h2 class="text-purple-300 text-lg leading-normal text-3xl">P is for project.</h2>
+      <h1 class="font-bold text-6xl my-10 bg-purple-700 text-purple-100 inline-block px-5 rounded shadow">P</h1>
+      <h2 class="text-purple-300 text-lg leading-normal text-3xl">As in, "How the hell do I work on this project."</h2>
+    </div>
 
-    <div class="border-t border-grey-light bg-grey-lighter mt-24 py-4">
-      <div class="container text-center">
-        <svg height="20" class="align-bottom" aria-label="code" viewBox="0 0 14 16" version="1.1" width="17" role="img"><path d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg> by <a href="https://www.dropseed.io">Dropseed</a>
+    <div class="bg-gray-100 pt-16 pb-24">
+      <div class="max-w-3xl mx-auto px-4 markdown">
+      {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    <div class="border-t border-gray-300 bg-gray-200 py-4">
+      <div class="container text-center mx-auto">
+        <svg height="20" class="align-text-bottom inline" aria-label="code" viewBox="0 0 14 16" version="1.1" width="17" role="img"><path d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg> by <a href="https://www.dropseed.io">Dropseed</a>
       </div>
     </div>
 

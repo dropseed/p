@@ -1,6 +1,6 @@
 import click
 
-from .core import discover_commands, do_command
+from .groups import Group
 from . import __version__
 
 
@@ -8,37 +8,61 @@ class Pcli(click.Group):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.discovered_commands = discover_commands()
+        self.group = Group()
+        ctx_settings = dict(ignore_unknown_options=True)
 
-        for name, subcommands in self.discovered_commands.items():
-            help = ", ".join([x.cmd for x in subcommands])
-            help = "Using: " + help
-
+        for command in self.group.commands.values():
+            # add all commands by full name (so db:load is available)
+            # but hide if they will be in a group also
             @click.command(
-                name, help=help, context_settings=dict(ignore_unknown_options=True)
+                command.name,
+                help=f"Using: {command.cmd}",
+                context_settings=ctx_settings,
+                hidden=bool(command.group_name),
             )
             @click.argument("cmd_args", nargs=-1, type=click.UNPROCESSED)
             @click.pass_context
             def func(ctx, cmd_args):
-                do_command(ctx.info_name, self.discovered_commands, cmd_args)
-                # exit(0 if result else 1)
+                self.group.do_command(ctx.info_name, cmd_args)
 
             self.add_command(func)
+
+        for group in self.group.subgroups.values():
+
+            @click.group(
+                group.name, context_settings=ctx_settings, invoke_without_command=False
+            )
+            @click.pass_context
+            def group_func(ctx):
+                ctx.meta["p_group"] = ctx.info_name
+
+            self.add_command(group_func)
+
+            for command in group.commands.values():
+
+                @click.command(
+                    command.group_command_name,
+                    help=f"Using: {command.cmd}",
+                    context_settings=ctx_settings,
+                )
+                @click.argument("cmd_args", nargs=-1, type=click.UNPROCESSED)
+                @click.pass_context
+                def func(ctx, cmd_args):
+                    # invoke the command by its full name
+                    self.group.do_command(
+                        f"{ctx.meta['p_group']}:{ctx.info_name}", cmd_args
+                    )
+
+                group_func.add_command(func)
 
 
 @click.group(cls=Pcli, invoke_without_command=True)
 @click.option("--version", is_flag=True)
-@click.option("--list", is_flag=True)
 @click.pass_context
-def cli(ctx, version, list):
+def cli(ctx, version):
     if not ctx.invoked_subcommand:
         if version:
             click.echo(__version__)
-        elif list:
-            for cmd, subcommands in ctx.command.discovered_commands.items():
-                click.echo(cmd)
-                for subcommand in subcommands:
-                    click.echo(f"  {subcommand}")
         else:
             click.echo(ctx.get_help())
 

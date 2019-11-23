@@ -8,9 +8,7 @@ class Makefile(BaseType):
     def _recognizes_path(cls, path):
         return os.path.basename(path) == "Makefile"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
+    def _add_commands(self):
         commands = []
 
         for line in open(self._path, "r"):
@@ -20,4 +18,4 @@ class Makefile(BaseType):
                 commands = commands + items
 
         for cmd in commands:
-            self._add_command(cmd, f"make {cmd}", inferred=False)
+            self._add_command(cmd, f"make {cmd}", preset=False)

@@ -8,6 +8,5 @@ class Combine(BaseType):
     def _recognizes_path(cls, path):
         return os.path.basename(path) == "combine.yml"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def _add_commands(self):
         self._add_command("work", "combine work")

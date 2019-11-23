@@ -1,6 +1,6 @@
 from .scripts import Scripts
 from .make import Makefile
-from .js import Npm, Yarn
+from .js import Npm, Yarn, NpmScripts
 from .python import Pipenv
 from .terraform import Terraform
 from .combine import Combine
@@ -10,10 +10,11 @@ from .dep import Dep
 
 # in order of priority
 known_types = [
-    # universal
+    # manual
     Makefile,
     Scripts,
-    # specific tools/languages
+    NpmScripts,
+    # presets
     Pipenv,
     Yarn,
     Npm,

@@ -1,0 +1,4 @@
+steps:
+  - run: "npm run build"
+    watch:
+      - "./content/static/css/*"
