@@ -21,14 +21,14 @@ you'll probably find that `p` is the first thing you run after `cd <project>` to
 
 Don't add it to a project. Add it to your machine, system-wide or user-wide.
 
-```
+```sh
 # System-wide or user-wide, not per project
 $ pip3 install -U p-cli
 ```
 
 ## What it looks like
 
-```
+```text
 $ cd project
 $ p
   Usage: p [OPTIONS] COMMAND [ARGS]...
@@ -60,7 +60,7 @@ The filename will be added as a command so that they can simply be run by doing 
 
 For example, this structure:
 
-```
+```text
 $ tree scripts/
 scripts/
 ├── compile-assets
@@ -74,7 +74,7 @@ scripts/
 
 Will result in:
 
-```
+```text
 $ p
   Usage: p [OPTIONS] COMMAND [ARGS]...
 
@@ -115,7 +115,7 @@ For example:
 
 Would result in:
 
-```
+```text
 Usage: p [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -151,16 +151,16 @@ This works automatically by using a `:` in your command name.
 For example, if you have commands like `db:load` and `db:reset`, you'll get a `db` group.
 You can run `p db` to see the subcommands in db, and run `p db load` to run a subcommand.
 
-```
+```text
 $ p
-Usage: p [OPTIONS] COMMAND [ARGS]...
+  Usage: p [OPTIONS] COMMAND [ARGS]...
 
-Options:
-  --version
-  --help     Show this message and exit.
+  Options:
+    --version
+    --help     Show this message and exit.
 
-Commands:
-  db
+  Commands:
+    db
 
 $ p db load
 ```
