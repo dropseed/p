@@ -4,6 +4,11 @@ P gathers up all of the available commands/scripts for a project,
 and aliases them as `p <name>`.
 Running `p` by itself will list out all of the known commands.
 
+If you *personally* start using p,
+you'll probably find that `p` is the first thing you run after `cd <project>` to get your bearings and start doing work.
+And when you get in the swing of using `p`,
+you'll naturally start improving your projects that have a poor developer experience.
+
 ## Install or update
 
 Don't add it to a project. Add it to your machine, system-wide or user-wide.
@@ -32,11 +37,6 @@ pre-commit      Using: ./scripts/pre-commit
 test            Using: ./scripts/test
 work            Using: combine work
 ```
-
-If you *personally* start using p,
-you'll probably find that `p` is the first thing you run after `cd <project>` to get your bearings and start doing work.
-And when you get in the swing of using `p`,
-you'll naturally start improving your projects that have a poor developer experience.
 
 ## The problem
 **It can often take several minutes just to figure out how to *start* working on
