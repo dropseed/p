@@ -1,9 +1,7 @@
 # p
 
-P is for project. As in, "How the hell do I work on this project."
-
-It works by gathering up all of the available commands/scripts for a project,
-and making them available as `p <name>`.
+P gathers up all of the available commands/scripts for a project,
+and aliases them as `p <name>`.
 Running `p` by itself will list out all of the known commands.
 
 If you *personally* start using p,
