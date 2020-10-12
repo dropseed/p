@@ -4,7 +4,7 @@ P gathers up all of the available commands/scripts for a project,
 and aliases them as `p <name>`.
 Running `p` by itself will list out all of the known commands.
 
-**Install or update**:
+## Install or update
 
 Don't add it to a project. Add it to your machine, system-wide or user-wide.
 
