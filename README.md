@@ -31,11 +31,10 @@ Options:
 
 Commands:
 compile-assets  Using: ./scripts/compile-assets
-install         Using: yarn install && pipenv sync --dev
+install         Using: ./scripts/install
 load-fixtures   Using: ./scripts/load-fixtures
 pre-commit      Using: ./scripts/pre-commit
 test            Using: ./scripts/test
-work            Using: combine work
 ```
 
 ## The problem
@@ -66,13 +65,11 @@ Options:
 Commands:
   mypy        Using: ./scripts/mypy
   pre-commit  Using: ./scripts/pre-commit
-  setup       Using: pipenv sync --dev
+  setup       Using: ./bin/setup
   test        Using: ./scripts/test
 ```
 
-It does this by discovering scripts and commands that already exist within
-the project, and by adding automatically preset commands for known package
-managers or tools.
+It does this by discovering scripts and commands that already exist within the project.
 
 **P is not a project requirement or dependency -- it is a personal
 tool.** Nothing in your project should depend on p, but rather conform
@@ -156,41 +153,9 @@ Options:
   --help     Show this message and exit.
 
 Commands:
-  install  Using: yarn install
+  install  Using: ./scripts/install
   start    Using: npm run start
 ```
-
-## Preset commands
-
-P will automatically add commands for known package managers. These
-can be overridden by providing your own script of the same name in one of the
-recognized locations. So, for example, if you want contributors to use
-something more specific than a regular `yarn install`, just add an
-“install” script to `package.json`.
-
-We only add things as people need them. If you don't see what you need, tell us!
-
-### package.json
-- `npm install` as `p install`
-
-### yarn.lock
-- `yarn install` as `p install`
-
-### .terraform or terraform.tfstate
-- `terraform init` as `p install`
-- `terraform apply` as `p deploy`
-
-### Pipfile.lock
-- `pipenv sync --dev` as `p install`
-
-### combine.yml
-- `combine work` as `p work`
-
-### Cartfile or Cartfile.resolved
-- `carthage update` as `p install`
-
-### Gopkg.toml or Gopkg.lock
-- `dep ensure` as `p install`
 
 ## Git hooks
 
