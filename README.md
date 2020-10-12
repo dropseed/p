@@ -1,6 +1,6 @@
 # p
 
-P makes it easy to jump between projects and get work done.
+P makes it easier to jump between projects and get work done.
 It gathers up all of the available commands/scripts in a repo,
 and aliases them to `p <name>`.
 
