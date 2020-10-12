@@ -4,21 +4,18 @@ P gathers up all of the available commands/scripts for a project,
 and aliases them as `p <name>`.
 Running `p` by itself will list out all of the known commands.
 
-If you *personally* start using p,
-you'll probably find that `p` is the first thing you run after `cd <project>` to get your bearings and start doing work.
-And when you get in the swing of using `p`,
-you'll naturally start improving your projects that have a poor developer experience.
-
 **Install or update**:
 
-```sh
+Don't add it to a project. Add it to your machine, system-wide or user-wide.
+
+```
 # System-wide or user-wide, not per project
 $ pip3 install -U p-cli
 ```
 
 ## Example
 
-```sh
+```
 $ cd project
 $ p
 Usage: p [OPTIONS] COMMAND [ARGS]...
@@ -36,12 +33,10 @@ test            Using: ./scripts/test
 work            Using: combine work
 ```
 
-## Why?
-
-- Context switching sucks.
-- New contributors don't always know where to start.
-- To help remind us that developer experience is important, and to take the time
-  to add commands/scripts to your project to make life easier for you and your contributors.
+If you *personally* start using p,
+you'll probably find that `p` is the first thing you run after `cd <project>` to get your bearings and start doing work.
+And when you get in the swing of using `p`,
+you'll naturally start improving your projects that have a poor developer experience.
 
 ## The problem
 **It can often take several minutes just to figure out how to *start* working on
@@ -54,13 +49,12 @@ Different languages, people, and tools accomplish this in different ways. Some
 projects use the good ol’ `Makefile`, while others use `package.json` “scripts”,
 bash scripts, `rake`, `fabric`, and so on and so on…
 
-
 ## A solution
 
 **Running `p` will show you which commands are available for the project you are on.**
 
 For example:
-```sh
+```
 $ cd project
 $ p
 Usage: p [OPTIONS] COMMAND [ARGS]...
@@ -92,14 +86,6 @@ etc.), and put them in a uniform place where contributors can easily figure
 out how to use them. P is simply a small abstraction layer to make it even
 easier yet for people that use it.
 
-## Install it for yourself
-
-Don't add it to a project. Add it to your machine, system-wide or user-wide.
-
-```sh
-$ pip3 install -U git+https://github.com/dropseed/p.git#egg=p
-```
-
 ## Project commands
 
 ### Local scripts
@@ -107,7 +93,7 @@ $ pip3 install -U git+https://github.com/dropseed/p.git#egg=p
 P will automatically find executable scripts (with no file extension) in `./scripts` or `./bin`.
 The filename will be added as a command so that they can simply be run by doing `p {script-name}`.
 
-```sh
+```
 $ tree scripts/
 scripts/
 ├── compile-assets
@@ -121,7 +107,7 @@ scripts/
 
 Will result in:
 
-```sh
+```
 $ p
   Usage: p [OPTIONS] COMMAND [ARGS]...
 
@@ -162,7 +148,7 @@ For example:
 
 Would result in:
 
-```sh
+```
 Usage: p [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -221,7 +207,7 @@ This works automatically by using a `:` in your command name.
 For example, if you have commands like `db:load` and `db:reset`, you'll get a `db` group.
 You can run `p db` to see the subcommands in db, and run `p db load` to run a subcommand.
 
-```sh
+```
 $ p
 Usage: p [OPTIONS] COMMAND [ARGS]...
 
