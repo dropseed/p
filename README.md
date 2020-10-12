@@ -1,8 +1,8 @@
 # p
 
-P gathers up all of the available commands/scripts for a project,
+P makes it easy to jump between projects and get work done.
+It gathers up all of the available commands/scripts in a repo,
 and aliases them to `p <name>`.
-Running `p` by itself will show you a list of what's available.
 
 **P is not a project requirement or dependency -- it is a personal
 tool.** Nothing in your project should depend on p, but rather conform
@@ -128,7 +128,7 @@ Commands:
 
 ## Git hooks
 
-P also provides automatical installation of [git hooks](#using-git-hooks).
+P also provides automatic installation of [git hooks](#using-git-hooks).
 
 For example, if you have a command named `pre-commit`, running `p
 install` or `p {git-hook-name}` will prompt you to install
