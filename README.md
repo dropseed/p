@@ -173,8 +173,8 @@ $ p db load
 
 ### Context switching sucks
 
-**It can often take several minutes just to figure out how to *start* working on
-something.**
+It can often take several minutes just to figure out how to *start* working on
+something.
 
 Every project is different, but damn near every project comes with a set of
 development commands or scripts to run common actions. And if it doesn’t, then
