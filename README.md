@@ -201,11 +201,11 @@ For a long time we've been in search of the perfect development task manager to 
 But that proved to be difficult as the repos got smaller,
 more self-contained,
 and spread across languages and dependency systems.
-Nobody wants to setup a `package.json` in a Python project just because you want a little command line tool that someone made in JavaScript.
 
-Using a Makefile is the closest thing to what we're looking for,
-but there's a lot of things we just can't stand about them.
-It's just ugly, and I can't help but think that it feels like some kind of *hack*.
+Using a Makefile is the closest thing to what we're looking for.
+Most people have `make`.
+But there's a lot of things we just can't stand about it
+(it's just ugly, and I can't help but think that it feels like some kind of *hack*).
 
 We've settled on the idea of using a "scripts" folder with one-off files for each task.
 Usually just bash scripts,
