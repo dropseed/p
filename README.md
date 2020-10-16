@@ -226,7 +226,7 @@ p smooths out the rough edges in our day-to-day,
 and enables us to make per-project decisions about the developer experience
 (and reminds us to even be thinking about that in the first place).
 
-### Using git hooks
+### Bonus: git hooks
 
 Git hooks can be a super useful,
 but confusing process to use.
