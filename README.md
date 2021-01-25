@@ -54,7 +54,10 @@ If you use p day-to-day and would like to see support for something not listed h
 
 ### Executable scripts
 
-P will automatically find executable scripts (with no file extension) in `./scripts` or `./bin`.
+P will automatically find executable scripts in `./scripts` or `./bin`.
+
+They should have no extension (don't need ".sh") and should be executable (`chmod +x ./scripts/thing`).
+
 The filename will be added as a command so that they can simply be run by doing `p {script-name}`.
 
 
