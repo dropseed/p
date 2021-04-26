@@ -1,2 +1,2 @@
 #!/bin/sh -e
-black p
+poetry run black p
