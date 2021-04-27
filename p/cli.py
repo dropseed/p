@@ -1,4 +1,9 @@
 import click
+import cls
+from cls import clevents
+
+cls.project_key = "x"
+cls.debug = True
 
 from .groups import Group
 from . import __version__
@@ -62,9 +67,13 @@ class Pcli(click.Group):
 def cli(ctx, version):
     if not ctx.invoked_subcommand:
         if version:
+            clevents.command("version")
             click.echo(__version__)
         else:
+            clevents.command("help")
             click.echo(ctx.get_help())
+    else:
+        clevents.command(f"custom:")
 
 
 if __name__ == "__main__":
