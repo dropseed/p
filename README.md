@@ -47,7 +47,7 @@ $ p
 
 ## Supported tools and workflows
 
-Note that p really only supports stuff that we use at [Dropseed](https://www.dropseed.io/).
+Note that p really only supports stuff that we use at [Dropseed](https://www.dropseed.dev/).
 **So this list is intentionally short.**
 If you use p day-to-day and would like to see support for something not listed here,
 [just let us know](https://github.com/dropseed/p/issues)!

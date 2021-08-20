@@ -2,11 +2,11 @@
 name = "p-cli"
 version = "1.1.1"
 description = "Aliases any available project commands or scripts to `p <name>`."
-authors = ["Dave Gaeddert <dave.gaeddert@dropseed.io>"]
+authors = ["Dave Gaeddert <dave.gaeddert@dropseed.dev>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://www.dropseed.io/p"
-documentation = "https://www.dropseed.io/p"
+homepage = "https://www.dropseed.dev/p"
+documentation = "https://www.dropseed.dev/p"
 repository = "https://github.com/dropseed/p"
 keywords = ["cli", "alias", "commands", "scripts", "bin"]
 packages = [
