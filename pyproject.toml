@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "p-cli"
-version = "1.1.1"
+version = "1.2.0"
 description = "Aliases any available project commands or scripts to `p <name>`."
 authors = ["Dave Gaeddert <dave.gaeddert@dropseed.dev>"]
 license = "MIT"
