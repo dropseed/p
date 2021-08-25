@@ -2,7 +2,7 @@
 name = "appdirs"
 version = "1.4.4"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -37,6 +37,17 @@ description = "Composable command line interface toolkit"
 category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+
+[[package]]
+name = "cls-client"
+version = "0.1.3"
+description = ""
+category = "main"
+optional = false
+python-versions = ">=3.6.2,<4.0.0"
+
+[package.dependencies]
+appdirs = ">=1.4.4,<2.0.0"
 
 [[package]]
 name = "dataclasses"
@@ -97,7 +108,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.2"
-content-hash = "548ad45615877395d3735e2ff41facdafabf58f1678a046a158d25fd7e0583bd"
+content-hash = "e942308ffb42b1fcccf884d30ad8fc0c99333441fd0cc35dd84d0389b46f97eb"
 
 [metadata.files]
 appdirs = [
@@ -111,6 +122,10 @@ black = [
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
     {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
+]
+cls-client = [
+    {file = "cls-client-0.1.3.tar.gz", hash = "sha256:6fb66842e5bf0af42c68ba3d7dcc8b6ea55fabdcb2ec70188688b523673e6dff"},
+    {file = "cls_client-0.1.3-py3-none-any.whl", hash = "sha256:173e73ca5cb5d0a5f8bc9a01ed2669611725c0563f6102a921d68605f358281d"},
 ]
 dataclasses = [
     {file = "dataclasses-0.8-py3-none-any.whl", hash = "sha256:0201d89fa866f68c8ebd9d08ee6ff50c0b255f8ec63a71c16fda7af82bb887bf"},

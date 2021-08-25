@@ -1,7 +1,12 @@
 import click
+import cls_client
 
 from .groups import Group
 from . import __version__
+
+
+cls_client.set_project_key("cls_pk_jlBkK2J8tNL36UfIZFgn8LqO")
+cls_client.set_project_slug("p")
 
 
 class Pcli(click.Group):
@@ -22,6 +27,7 @@ class Pcli(click.Group):
             )
             @click.argument("cmd_args", nargs=-1, type=click.UNPROCESSED)
             @click.pass_context
+            @cls_client.track_command(name=command.name)
             def func(ctx, cmd_args):
                 self.group.do_command(ctx.info_name, cmd_args)
 
@@ -63,8 +69,10 @@ def cli(ctx, version):
     if not ctx.invoked_subcommand:
         if version:
             click.echo(__version__)
+            cls_client.track_event(slug="version", type="command", dispatch=True)
         else:
             click.echo(ctx.get_help())
+            cls_client.track_event(slug="_", type="command", dispatch=True)
 
 
 if __name__ == "__main__":
