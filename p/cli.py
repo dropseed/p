@@ -69,10 +69,14 @@ def cli(ctx, version):
     if not ctx.invoked_subcommand:
         if version:
             click.echo(__version__)
-            cls_client.track_event(slug="version", type="command", dispatch=True)
+            cls_client.track_event(
+                slug="version", type="command", metadata={}, dispatch=True
+            )
         else:
             click.echo(ctx.get_help())
-            cls_client.track_event(slug="_", type="command", dispatch=True)
+            cls_client.track_event(
+                slug="_list_", type="command", metadata={}, dispatch=True
+            )
 
 
 if __name__ == "__main__":
