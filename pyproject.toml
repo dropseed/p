@@ -19,7 +19,7 @@ p = "p.cli:cli"
 [tool.poetry.dependencies]
 python = "^3.6.2"
 click = "^7.1.2"
-cls-client = "^1.0.0"
+cls-client = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.4b0"

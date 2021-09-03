@@ -7,6 +7,7 @@ from . import __version__
 
 cls_client.set_project_key("cls_pk_jlBkK2J8tNL36UfIZFgn8LqO")
 cls_client.set_project_slug("p")
+cls_client.set_version(__version__)
 
 
 class Pcli(click.Group):
