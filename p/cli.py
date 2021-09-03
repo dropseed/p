@@ -63,21 +63,11 @@ class Pcli(click.Group):
                 group_func.add_command(func)
 
 
-@click.group(cls=Pcli, invoke_without_command=True)
-@click.option("--version", is_flag=True)
+@click.group(cls=Pcli)
+@click.version_option(__version__)
 @click.pass_context
-def cli(ctx, version):
-    if not ctx.invoked_subcommand:
-        if version:
-            click.echo(__version__)
-            cls_client.track_event(
-                slug="version", type="command", metadata={}, dispatch=True
-            )
-        else:
-            click.echo(ctx.get_help())
-            cls_client.track_event(
-                slug="_list_", type="command", metadata={}, dispatch=True
-            )
+def cli(ctx):
+    pass
 
 
 if __name__ == "__main__":
