@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "p-cli"
+name = "p"
 version = "1.2.4"
 description = "Aliases any available project commands or scripts to `p <name>`."
 authors = ["Dave Gaeddert <dave.gaeddert@dropseed.dev>"]

@@ -14,10 +14,12 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0  # all branches and tags
-    - uses: dropseed/nextrelease@v0
+    - uses: dropseed/nextrelease@v1
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.DROPSEED_PYPI_TOKEN }}
       with:
         prepare_cmd: |
-          sed -i -e "s/version = \"[^\"]*\"/version = \"$VERSION\"/g" pyproject.toml
+          sed -i -e "s/version = \"[^\"]*\"$/version = \"$VERSION\"/g" pyproject.toml
         publish_cmd: |
-          poetry publish --build
+          pip3 install -U pip poetry && poetry publish --build --no-interaction
         github_token: ${{ secrets.GITHUB_TOKEN }}
