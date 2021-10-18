@@ -23,7 +23,7 @@ Don't add it to a project. Add it to your machine, system-wide or user-wide.
 
 ```sh
 # System-wide or user-wide, not per project
-$ pip3 install -U p-cli
+$ pip3 install -U p
 ```
 
 ## What it looks like
