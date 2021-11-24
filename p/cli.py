@@ -1,4 +1,5 @@
 import click
+from click_didyoumean import DYMGroup
 import cls_client
 
 from .groups import Group
@@ -10,7 +11,7 @@ cls_client.set_project_slug("p")
 cls_client.set_version(__version__)
 
 
-class Pcli(click.Group):
+class Pcli(DYMGroup):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -37,7 +38,7 @@ class Pcli(click.Group):
         for group in self.group.subgroups.values():
 
             @click.group(
-                group.name, context_settings=ctx_settings, invoke_without_command=False
+                group.name, cls=DYMGroup, context_settings=ctx_settings, invoke_without_command=False
             )
             @click.pass_context
             def group_func(ctx):

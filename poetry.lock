@@ -36,6 +36,17 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "click-didyoumean"
+version = "0.3.0"
+description = "Enables git-like *did-you-mean* feature in click"
+category = "main"
+optional = false
+python-versions = ">=3.6.2,<4.0.0"
+
+[package.dependencies]
+click = ">=7"
+
+[[package]]
 name = "cls-client"
 version = "1.2.0"
 description = ""
@@ -114,7 +125,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.2"
-content-hash = "fcef847cc64444034164eeb2ce7f19d5c56335d385740ca7b79d847dadf8c73a"
+content-hash = "f3c424f36c264eceb2c9d329d54518a53d73b04fbcb5822312e48e70c3cfd7de"
 
 [metadata.files]
 black = [
@@ -124,6 +135,10 @@ black = [
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
     {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
+]
+click-didyoumean = [
+    {file = "click-didyoumean-0.3.0.tar.gz", hash = "sha256:f184f0d851d96b6d29297354ed981b7dd71df7ff500d82fa6d11f0856bee8035"},
+    {file = "click_didyoumean-0.3.0-py3-none-any.whl", hash = "sha256:a0713dc7a1de3f06bc0df5a9567ad19ead2d3d5689b434768a6145bff77c0667"},
 ]
 cls-client = [
     {file = "cls-client-1.2.0.tar.gz", hash = "sha256:26837e47485cf2bb943345dde863c5001a5fed1fd69a654516af20170098bfe0"},
