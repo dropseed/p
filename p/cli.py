@@ -38,7 +38,10 @@ class Pcli(DYMGroup):
         for group in self.group.subgroups.values():
 
             @click.group(
-                group.name, cls=DYMGroup, context_settings=ctx_settings, invoke_without_command=False
+                group.name,
+                cls=DYMGroup,
+                context_settings=ctx_settings,
+                invoke_without_command=False,
             )
             @click.pass_context
             def group_func(ctx):
