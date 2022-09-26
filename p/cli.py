@@ -1,14 +1,8 @@
 import click
 from click_didyoumean import DYMGroup
-import cls_client
 
 from .groups import Group
 from . import __version__
-
-
-cls_client.set_project_key("cls_pk_jlBkK2J8tNL36UfIZFgn8LqO")
-cls_client.set_project_slug("p")
-cls_client.set_version(__version__)
 
 
 class Pcli(DYMGroup):
@@ -29,7 +23,6 @@ class Pcli(DYMGroup):
             )
             @click.argument("cmd_args", nargs=-1, type=click.UNPROCESSED)
             @click.pass_context
-            @cls_client.track_command(name=command.name)
             def func(ctx, cmd_args):
                 self.group.do_command(ctx.info_name, cmd_args)
 
