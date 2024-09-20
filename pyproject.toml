@@ -17,7 +17,7 @@ packages = [
 p = "p.cli:cli"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.8"
 click = "^7.1.2"
 click-didyoumean = "^0.3.0"
 

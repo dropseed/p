@@ -1,6 +1,6 @@
-import pkg_resources
+import importlib.metadata
 
 
 __author__ = "Dropseed"
 __email__ = "python@dropseed.dev"
-__version__ = pkg_resources.get_distribution("p").version
+__version__ = importlib.metadata.version("p")
