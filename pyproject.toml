@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "p"
-version = "1.4.0"
+version = "1.5.0"
 description = "Aliases any available project commands or scripts to `p <name>`."
 authors = ["Dave Gaeddert <dave.gaeddert@dropseed.dev>"]
 license = "MIT"
